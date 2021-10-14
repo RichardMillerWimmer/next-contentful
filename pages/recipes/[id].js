@@ -67,6 +67,7 @@ export default function RecipeDetails( {recipe} ) {
       return { params: {id: item.fields.slug}}
     })
     // console.log('paths', paths)
+
     return {
       paths, 
       fallback: true
@@ -79,6 +80,16 @@ export default function RecipeDetails( {recipe} ) {
       'fields.slug': params.id
     })
     // console.log('staticprops', res)
+
+    if(!res.items.length) {
+      return {
+        redirect: {
+          desination: '/',
+          peranent: false
+        }
+      }
+    }
+
     return {
       props: {recipe: res.items[0]},
       revalidate: 100
