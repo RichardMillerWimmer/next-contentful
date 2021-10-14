@@ -77,7 +77,8 @@ export default function RecipeDetails( {recipe} ) {
     })
     // console.log('staticprops', res)
     return {
-      props: {recipe: res.items[0]}
+      props: {recipe: res.items[0]},
+      revalidate: 100
     }
 
   }
