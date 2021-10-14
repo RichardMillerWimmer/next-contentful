@@ -5,7 +5,7 @@ const client = createClient({ space: process.env.CONTENTFUL_SPACE_ID, accessToke
 
 export default function RecipeDetails( {recipe} ) {
   
-  console.log(recipe)
+  console.log('recipe', recipe)
     return (
       <div>
         Recipe Details
@@ -17,11 +17,11 @@ export default function RecipeDetails( {recipe} ) {
     const res = await client.getEntries({
       content_type: 'recipe'
     })
-    console.log(res)
+    // console.log('staticpath', res)
     const paths = res.items.map(item => {
       return { params: {id: item.fields.slug}}
     })
-    // console.log(paths)
+    // console.log('paths', paths)
     return {
       paths, 
       fallback: false
@@ -33,9 +33,9 @@ export default function RecipeDetails( {recipe} ) {
       content_type: 'recipe',
       'fields.slug': params.id
     })
-    // console.log(res)
+    // console.log('staticprops', res)
     return {
-      props: {}
+      props: {recipe: res.items[0]}
     }
 
   }
